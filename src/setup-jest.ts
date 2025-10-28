@@ -9,4 +9,6 @@ import {
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
+
+  // Object.defineProperty(window, 'CSS', { value: null });
 );

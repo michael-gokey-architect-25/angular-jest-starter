@@ -1,7 +1,7 @@
 // src/app/components/hello/hello.component.spec.ts
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HelloComponent } from './hello.component';
+
 
 describe('HelloComponent', () => {
   let component: HelloComponent;
@@ -9,7 +9,8 @@ describe('HelloComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HelloComponent]
+      // imports: [HelloComponent]
+      declarations: [HelloComponent]
     })
     .compileComponents();
 
@@ -21,4 +22,10 @@ describe('HelloComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render Hello text', () => {
+    const el: HTMLElement = fixture.nativeElement;
+    expect(el.textContent).toContain('Hello');
+  });
+
 });

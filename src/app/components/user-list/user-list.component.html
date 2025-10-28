@@ -6,6 +6,8 @@
 
 <mat-list *ngIf="!loading">
   <h3 mat-subheader>Users</h3>
+  <div *ngIf="loading">Loading…</div>
+  <div *ngIf="error">{{ error }}</div>
   <mat-list-item *ngFor="let user of users">
     {{ user.name }} — {{ user.email }}
   </mat-list-item>
