@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink, MatToolbarModule, MatButtonModule],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
   // protected readonly title = signal('angular-jest-starter');
