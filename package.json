@@ -1,6 +1,10 @@
 {
-  "name": "angular-jest-starter",
-  "version": "0.0.0",
+  "name": "angular-jest-starter-gh",
+  "version": "1.0.0",
+  "author": "Michael Gokey <michael.gokey.architect@gmail.com>",
+  "description": "Angular Jest starter",
+  "keywords": ["Angular", "Jest", "Unit Testing", "Routing"],
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
