@@ -57,8 +57,8 @@ describe('UserListComponent', () => {
       expect(component.error).toBe('');
     });
 
-    it('should call load() on ngOnInit', () => {
-      const loadSpy = jest.spyOn(component, 'load');
+    it('should call loadUsers() on ngOnInit', () => {
+      const loadSpy = jest.spyOn(component, 'loadUsers');
       component.ngOnInit();
       expect(loadSpy).toHaveBeenCalled();
     });
