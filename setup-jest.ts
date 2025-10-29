@@ -1,23 +1,17 @@
 // root/setup-jest.ts
-import 'jest-preset-angular/setup-jest';
-// import { getTestBed } from '@angular/core/testing';
-// import {
-//   BrowserDynamicTestingModule,
-//   platformBrowserDynamicTesting,
-// } from '@angular/platform-browser-dynamic/testing';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 
-// getTestBed().initTestEnvironment(
-//   BrowserDynamicTestingModule,
-//   platformBrowserDynamicTesting()
-// );
+setupZoneTestEnv();
 
-
-
-// The import above handles all Angular test environment setup automatically.
-// No need to manually call getTestBed().initTestEnvironment()
-
-// Optional: Uncomment if you need to suppress CSS-related warnings
+// Optional: Add custom matchers or configure global test settings
+// Example:
 // Object.defineProperty(window, 'CSS', { value: null });
+// Object.defineProperty(window, 'getComputedStyle', {
+//   value: () => ({
+//     display: 'none',
+//     appearance: ['-webkit-appearance']
+//   })
+// });
 
-// Optional: Uncomment to set custom test timeout (default is 5000ms)
+// Optional: Configure default timeout
 // jest.setTimeout(10000);

@@ -9,9 +9,12 @@ const config: Config = {
   collectCoverageFrom: [
     'src/app/**/*.ts',
     '!src/app/**/*.spec.ts',
-    '!src/main.ts'
+    '!src/app/**/*.module.ts',
+    '!src/main.ts',
+    '!src/polyfills.ts'
   ],
   coverageDirectory: 'coverage',
+  coverageReporters: ['html', 'text', 'lcov', 'json'],
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)']
 };
