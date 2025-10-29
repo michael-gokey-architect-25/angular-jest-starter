@@ -7,4 +7,5 @@ export const routes: Routes = [
   { path: '', redirectTo: '/hello', pathMatch: 'full' },
   { path: 'hello', component: HelloComponent },
   { path: 'users', component: UserListComponent },
+  // optional catch-all: { path: '**', redirectTo: 'hello' }
 ];
