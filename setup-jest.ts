@@ -1,4 +1,4 @@
-// src/setup-jest.ts
+// root/setup-jest.ts
 import 'jest-preset-angular/setup-jest';
 // import { getTestBed } from '@angular/core/testing';
 // import {
