@@ -1,7 +1,6 @@
 // src/app/components/user-list/user-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../services/user.service';
@@ -15,36 +14,29 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit {
   users: any[] = [];
-  // loading = true;
   loading = false;
   error = '';
 
-  constructor(
-    private userService: UserService, 
-    private http: HttpClient
-  ) {}
+  constructor(private userService: UserService) {}
 
-  // ngOnInit(): void {
-  //   this.userService.getUsers().subscribe({
-  //     next: (data) => {
-  //       this.users = data;
-  //       this.loading = false;
-  //     },
-  //     error: () => (this.loading = false),
-  //   });
-  // }
-
-    ngOnInit(): void {
-    this.load();
+  ngOnInit(): void {
+    this.loadUsers();
   }
 
-  load() {
+  loadUsers(): void {
     this.loading = true;
-    this.http.get<any[]>('https://jsonplaceholder.typicode.com/users')
-      .subscribe({
-        next: (user) => { this.users = user; this.loading = false; },
-        error: (err) => { this.error = 'Could not load users.'; this.loading = false; }
-      });
+    this.error = '';
+    
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Could not load users.';
+        this.loading = false;
+        console.error('Error loading users:', err);
+      }
+    });
   }
-
 }
