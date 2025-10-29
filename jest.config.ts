@@ -1,4 +1,4 @@
-// root/jest.config.js
+// root/jest.config.ts
 import type { Config } from 'jest';
 
 const config: Config = {
