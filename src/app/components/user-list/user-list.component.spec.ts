@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 
+
 describe('UserListComponent', () => {
   let fixture: ComponentFixture<UserListComponent>;
   let component: UserListComponent;
@@ -28,7 +29,7 @@ describe('UserListComponent', () => {
   });
 
   afterEach(() => {
-    httpMock.verify();
+    httpMock.verify(); // Ensures no outstanding HTTP requests
   });
 
   it('should create component', () => {
@@ -74,7 +75,12 @@ describe('UserListComponent', () => {
 
   it('should set loading to true when load is called', () => {
     component.load();
+    
     expect(component.loading).toBe(true);
+    
+    // Must flush the request to prevent "open requests" error
+    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
+    req.flush([]);
   });
 
   it('should handle error during load', () => {
