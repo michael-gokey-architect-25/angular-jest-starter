@@ -83,7 +83,11 @@ describe('UserListComponent', () => {
     req.flush([]);
   });
 
+  
+  // To suppress the console.error output during the error test, add a consoleErrorSpy
   it('should handle error during load', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    
     fixture.detectChanges();
     
     const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
@@ -91,7 +95,11 @@ describe('UserListComponent', () => {
     
     expect(component.error).toBe('Could not load users.');
     expect(component.loading).toBe(false);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+    
+    consoleErrorSpy.mockRestore();
   });
+
 
   it('should set loading to false after successful load', () => {
     component.load();
