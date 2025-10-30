@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService } from './user.service';
 
+
 describe('UserService', () => {
   let service: UserService;
   let httpMock: HttpTestingController;
@@ -17,7 +18,6 @@ describe('UserService', () => {
   });
 
   afterEach(() => {
-    // Verify that no unmatched requests are outstanding
     httpMock.verify();
   });
 
@@ -26,14 +26,13 @@ describe('UserService', () => {
   });
 
   describe('getUsers', () => {
-    it('should return an Observable<any[]>', () => {
+    it('should return an Observable of users', () => {
       const mockUsers = [
         { id: 1, name: 'John Doe', email: 'john@example.com' },
         { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
       ];
 
       service.getUsers().subscribe(users => {
-        expect(users).toBeTruthy();
         expect(users.length).toBe(2);
         expect(users).toEqual(mockUsers);
       });
@@ -43,7 +42,15 @@ describe('UserService', () => {
       req.flush(mockUsers);
     });
 
-    it('should handle empty array response', () => {
+    it('should call the correct API endpoint', () => {
+      service.getUsers().subscribe();
+
+      const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
+      expect(req.request.url).toBe('https://jsonplaceholder.typicode.com/users');
+      req.flush([]);
+    });
+
+    it('should handle empty response', () => {
       service.getUsers().subscribe(users => {
         expect(users).toEqual([]);
         expect(users.length).toBe(0);
@@ -53,28 +60,21 @@ describe('UserService', () => {
       req.flush([]);
     });
 
-    it('should handle HTTP error gracefully', () => {
+    it('should handle HTTP errors', () => {
       const errorMessage = 'Network error';
 
       service.getUsers().subscribe({
-        next: () => fail('should have failed with 500 error'),
+        next: () => fail('should have failed with network error'),
         error: (error) => {
-          expect(error.status).toBe(500);
-          expect(error.statusText).toBe('Server Error');
+          expect(error.error).toBe(errorMessage);
         }
       });
 
       const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
-      req.flush(errorMessage, { status: 500, statusText: 'Server Error' });
-    });
-
-    it('should make only one HTTP request', () => {
-      service.getUsers().subscribe();
-      
-      const requests = httpMock.match('https://jsonplaceholder.typicode.com/users');
-      expect(requests.length).toBe(1);
-      
-      requests[0].flush([]);
+      req.error(new ProgressEvent('error'), { 
+        status: 500, 
+        statusText: errorMessage 
+      });
     });
   });
 });

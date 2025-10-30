@@ -13,6 +13,9 @@ import { UserService } from '../../services/user.service';
   styleUrl: './user-list.component.css',
 })
 export class UserListComponent implements OnInit {
+  load() {
+    throw new Error('Method not implemented.');
+  }
   users: any[] = [];
   loading = false;
   error = '';
