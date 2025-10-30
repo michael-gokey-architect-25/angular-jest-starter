@@ -40,3 +40,9 @@ Notes:
 https://stackblitz.com/edit/angular-v20-jest-starter-base
 
 https://stackblitz.com/edit/angular-v20-jest-starter
+
+
+- Test Suites: 5 passed, 5 total
+- Tests:       47 passed, 47 total
+- Snapshots:   0 total
+- Time:        23.933 s
