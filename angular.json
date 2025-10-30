@@ -7,28 +7,44 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "style": "css",
           "standalone": true,
-          "inlineTemplate": false,
-          "inlineStyle": false,
+          "flat": false,
           "skipTests": false,
-          "style": "css"
+          "inlineStyle": false,
+          "inlineTemplate": false
         },
         "@schematics/angular:directive": {
           "standalone": true,
+          "flat": false,
+          "skipTests": false
+        },
+        "@schematics/angular:service": {
+          "flat": false,
+          "skipTests": false
+        },
+        "@schematics/angular:guard": {
+          "flat": false,
+          "skipTests": false
+        },
+        "@schematics/angular:interceptor": {
+          "flat": false,
           "skipTests": false
         },
         "@schematics/angular:pipe": {
           "standalone": true,
+          "flat": false,
           "skipTests": false
         },
-        "@schematics/angular:service": {
+        "@schematics/angular:resolver": {
+          "flat": false,
           "skipTests": false
         },
-        "@schematics/angular:guard": {
-          "skipTests": false
+        "@schematics/angular:interface": {
+          "prefix": ""
         },
-        "@schematics/angular:interceptor": {
-          "skipTests": false
+        "@schematics/angular:class": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -91,8 +107,30 @@
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
